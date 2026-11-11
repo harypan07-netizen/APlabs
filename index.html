@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101510">
+  <meta name="description" content="APLabs creates thoughtful, useful mobile experiences. Discover our approach to app development and support.">
+  <title>APLabs — Apps made with purpose</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #101510;
+      --surface: #171e18;
+      --text: #f2f5ee;
+      --muted: #a7b0a5;
+      --accent: #c7f36b;
+      --line: rgba(235, 244, 229, .13);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 82% 9%, rgba(147, 195, 86, .14), transparent 34rem),
+        var(--background);
+      color: var(--text);
+      font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      display: flex;
+      min-height: 84px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.05rem;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--accent);
+      color: #17200d;
+      font-size: .9rem;
+      letter-spacing: -.08em;
+    }
+
+    nav { display: flex; gap: 30px; }
+
+    nav a {
+      color: var(--muted);
+      font-size: .92rem;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    nav a:hover, nav a:focus-visible { color: var(--accent); }
+
+    .hero {
+      display: grid;
+      min-height: 580px;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 64px;
+      padding-block: 84px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 700px;
+      margin: 0;
+      font-size: clamp(3.2rem, 7.5vw, 6.3rem);
+      font-weight: 650;
+      letter-spacing: -.075em;
+      line-height: .98;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-copy {
+      max-width: 530px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 32px;
+      padding: 0 20px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #17200d;
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .button:hover { transform: translateY(-2px); background: #d7ff8c; }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 370px;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: min(340px, 85vw);
+      aspect-ratio: 1;
+      border: 1px solid rgba(199, 243, 107, .24);
+      border-radius: 50%;
+      transform: rotate(-24deg) scaleY(.55);
+    }
+
+    .orbit::before, .orbit::after {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      content: "";
+    }
+
+    .orbit::before { top: 16%; left: 18%; }
+    .orbit::after { right: 12%; bottom: 23%; width: 6px; height: 6px; }
+
+    .app-tile {
+      position: relative;
+      display: grid;
+      width: 190px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 42px;
+      background: linear-gradient(145deg, #293628, #172018 70%);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .35), inset 0 1px rgba(255, 255, 255, .12);
+      transform: rotate(-8deg);
+    }
+
+    .app-tile span {
+      color: var(--accent);
+      font-size: 5.3rem;
+      font-weight: 800;
+      letter-spacing: -.12em;
+      line-height: 1;
+      transform: translateX(-5px);
+    }
+
+    section { scroll-margin-top: 28px; }
+
+    .section {
+      padding-block: 92px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 52px;
+      align-items: start;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 600;
+      letter-spacing: -.055em;
+      line-height: 1.12;
+    }
+
+    .section-copy {
+      max-width: 620px;
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 54px;
+    }
+
+    .value-card {
+      min-height: 190px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(23, 30, 24, .65);
+    }
+
+    .value-card .number {
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+
+    h3 { margin: 24px 0 8px; font-size: 1.15rem; }
+    .value-card p, .contact-card p { margin: 0; color: var(--muted); }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin-top: 42px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .contact-card strong { display: block; margin-bottom: 5px; font-size: 1.1rem; }
+    .contact-card a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+    footer {
+      display: flex;
+      min-height: 86px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    footer p { margin: 0; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .topbar { min-height: 72px; }
+      nav { gap: 16px; }
+      nav a { font-size: .84rem; }
+      .hero {
+        min-height: 0;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-block: 76px 45px;
+      }
+      h1 { font-size: clamp(3.4rem, 15vw, 5.5rem); }
+      .hero-art { min-height: 300px; }
+      .app-tile { width: 155px; border-radius: 34px; }
+      .app-tile span { font-size: 4.5rem; }
+      .section { padding-block: 68px; }
+      .section-heading { grid-template-columns: 1fr; gap: 20px; }
+      .values { grid-template-columns: 1fr; margin-top: 34px; }
+      .value-card { min-height: 0; }
+      .contact-card { align-items: flex-start; flex-direction: column; padding: 24px; }
+    }
+
+    @media (max-width: 420px) {
+      nav { gap: 11px; }
+      nav a { font-size: .78rem; }
+      .brand { gap: 8px; font-size: .93rem; }
+      .brand-mark { width: 32px; height: 32px; }
+      footer { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#home" aria-label="APLabs home">
+      <span class="brand-mark" aria-hidden="true">AP</span>
+      <span>APLABS</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#approach">My approach</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="home">
+      <div>
+        <p class="eyebrow">Independent app development</p>
+        <h1>Apps made<br>with <span>purpose.</span></h1>
+        <p class="hero-copy">APLabs is a solo developer’s effort to create helpful mobile apps and make useful tools accessible to as many people as possible.</p>
+        <a class="button" href="#about">Get to know us <span aria-hidden="true">&nbsp;↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="app-tile"><span>AP</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">About APLabs</p>
+            <h2>Small details.<br>Better experiences.</h2>
+          </div>
+          <p class="section-copy">APLabs is the independent work of a solo developer preparing to publish apps in the near future. My goal is to help as many people as possible by creating useful, reliable, and easy-to-use software. I want the value to people to come first—not monetary gain.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">What matters to me</p>
+            <h2>A considered<br>way to build.</h2>
+          </div>
+          <p class="section-copy">I believe useful apps should be made with people in mind. I aim to build with care, keep experiences clear and dependable, and make helping people the priority.</p>
+        </div>
+        <div class="values">
+          <article class="value-card">
+            <span class="number">01 / USEFUL</span>
+            <h3>Built around real needs</h3>
+            <p>I focus on practical features that solve real problems and help people in their everyday lives.</p>
+          </article>
+          <article class="value-card">
+            <span class="number">02 / SIMPLE</span>
+            <h3>Easy to understand</h3>
+            <p>I aim to make apps straightforward and useful for as many people as possible.</p>
+          </article>
+          <article class="value-card">
+            <span class="number">03 / RESPONSIBLE</span>
+            <h3>Designed with care</h3>
+            <p>I aim to communicate honestly and handle every app experience thoughtfully.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Get in touch</p>
+            <h2>Here to help.</h2>
+          </div>
+          <p class="section-copy">Have a question or need support? Contact APLabs by email or phone. I’m happy to hear from you.</p>
+        </div>
+        <div class="contact-card">
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:no1utilitytools@gmail.com">no1utilitytools@gmail.com</a>
+          </div>
+          <div>
+            <strong>Phone</strong>
+            <a href="tel:9761846792">9761846792</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>© <span id="year">2026</span> APLabs. All rights reserved.</p>
+    <a href="#home">Back to top ↑</a>
+  </footer>
+</body>
+</html>
